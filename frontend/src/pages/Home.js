@@ -6,7 +6,7 @@ const Home = () => {
 
   const headers = {
     "Content-Type": "application/json"
-  }
+  };
 
     useEffect(() => {
     const getData = async () => {
@@ -15,24 +15,24 @@ const Home = () => {
         headers: headers,
         redirect: 'follow'
       });
-
-      const data = await response.json()
-      const obj = JSON.parse(data.body);
-
-      setCourses(obj.Items)
         // .then(response => response.text())
         // .then(result => alert(JSON.parse(result).body))
         // .catch(error => console.log('error', error))
+
+      const data = await response.json();
+      const obj = JSON.parse(data.body);
+
+      setCourses(obj.Items);
     }
     getData();
-    console.log(courses)
+    // console.log(courses)
   })
   
   return(
     <>
       <title>Home</title>
       <h1>Courses</h1>
-      <h2>Note: below are 2 items in a Dynamo table, fetched through Lambda function API</h2>
+      {/* <h2>Note: below are 2 items in a Dynamo table, fetched through Lambda function API</h2> */}
       {courses.map(course => (<div><h4>{course.courseName.S}</h4><p>{course.description.S}</p></div>))}
       {/* <p>{JSON.stringify(courses)}</p> */}
     </>
