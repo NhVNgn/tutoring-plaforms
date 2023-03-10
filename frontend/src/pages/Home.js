@@ -33,8 +33,8 @@ const Home = () => {
       <title>Home</title>
       <h1>Courses</h1>
       <h2>Note: below are 2 items in a Dynamo table, fetched through Lambda function API</h2>
-      {courses.map(course => <h4>{course.courseName.S}</h4>)}
-      <p>{JSON.stringify(courses)}</p>
+      {courses.map(course => (<div><h4>{course.courseName.S}</h4><p>{course.description.S}</p></div>))}
+      {/* <p>{JSON.stringify(courses)}</p> */}
     </>
   )
 };
