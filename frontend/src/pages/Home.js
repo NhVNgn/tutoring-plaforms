@@ -6,6 +6,8 @@ const Home = () => {
   const [courses, setCourses] = useState([]);
   const colours = ["#EDAA6C", "#EA713D", "#D83E27", "#152B53", "#1F6E8E", "#2C8B98", "#82A8A0"]
 
+  const raw = JSON.stringify({"action": "SCAN"});
+
   useEffect(() => {
     const getData = async () => {
       const response = await fetch("https://56j70ao9r7.execute-api.us-east-1.amazonaws.com/dev", {
@@ -13,6 +15,7 @@ const Home = () => {
         headers: {
           "Content-Type": "application/json"
         },
+        body: raw,
         redirect: 'follow'
       });
       // .then(response => response.text())
