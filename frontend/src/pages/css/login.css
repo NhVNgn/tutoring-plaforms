@@ -1,5 +1,9 @@
 /* Custom CSS */
 
+.wrapper{
+    padding: 50px;
+  }
+
 .container {
     max-width: 500px;
     margin: auto;

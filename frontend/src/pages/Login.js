@@ -25,36 +25,38 @@ const Login = () => {
     };
   
     return (
-    <div className="container">
-        <title>Login</title>
-        <form onSubmit={handleSubmit}>
-        <h2 className="heading">Login</h2>
-        <div className="form-group">
-            <label htmlFor="role">You are:</label>
-            
-            <div className="btn-group" data-toggle="buttons" value={userRole} onChange={handleUserRoleChange} required>
-                <label className="btn btn-student">
-                    <input type="radio" name="role" value="student" required/>Student
-                </label>
-                <label className="btn btn-tutor">
-                    <input type="radio" name="role" value="tutor"/>Tutor
-                </label>
+    <div className="wrapper">
+        <div className="container">
+            <title>Login</title>
+            <form onSubmit={handleSubmit}>
+            <h2 className="heading">Login</h2>
+            <div className="form-group">
+                <label htmlFor="role">You are:</label>
+                
+                <div className="btn-group" data-toggle="buttons" value={userRole} onChange={handleUserRoleChange} required>
+                    <label className="btn btn-student">
+                        <input type="radio" name="role" value="student" required/>Student
+                    </label>
+                    <label className="btn btn-tutor">
+                        <input type="radio" name="role" value="tutor"/>Tutor
+                    </label>
+                </div>
             </div>
+            <div className="form-group">
+                <label htmlFor="name">Username or email:</label>
+                <input type="text" className="form-control" id="name_email" placeholder="Enter your name/email" value={userNEmail} onChange={handleUserEmailChange} required />
+            </div>
+            <div className="form-group">
+                <label htmlFor="password">Password:</label>
+                <input type="password" className="form-control" id="password" placeholder="Enter your password" value={password} onChange={handlePasswordChange} required />
+            </div>
+            
+            <button type="submit" className="btn btn-primary">Login</button>
+            <br/><br/>
+            <Link to="/register">Or Sign Up</Link>
+            </form>
         </div>
-        <div className="form-group">
-            <label htmlFor="name">Username or email:</label>
-            <input type="text" className="form-control" id="name_email" placeholder="Enter your name/email" value={userNEmail} onChange={handleUserEmailChange} required />
-        </div>
-        <div className="form-group">
-            <label htmlFor="password">Password:</label>
-            <input type="password" className="form-control" id="password" placeholder="Enter your password" value={password} onChange={handlePasswordChange} required />
-        </div>
-        
-        <button type="submit" className="btn btn-primary">Login</button>
-        <br/><br/>
-        <Link to="/register">Or Sign Up</Link>
-        </form>
-      </div>
+    </div>
     );
 };
   

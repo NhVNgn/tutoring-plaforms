@@ -28,7 +28,7 @@ const Home = () => {
       setCourses(obj.Items);
     }
     getData();
-  }, [])
+  }, [raw])
 
   console.log(courses);
 

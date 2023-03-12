@@ -1,10 +1,13 @@
 import React from "react";
+import "./css/home.css";
 
 const About = () => {
     return(
       <>
         <title>About</title>
-        <h1>About us</h1>
+        <div className="wrapper">
+          <h1>About us</h1>
+        </div>
       </>
     )
   };
