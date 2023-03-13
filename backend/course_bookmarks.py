@@ -40,21 +40,33 @@ def lambda_handler(event, context):
         data = json.loads(event['body'])
         username = data['username']
         courseID = data['courseID']
+        courseName = data['courseName']
+        description = data['description']
+        price = data['price']
         
         try:
             response = table.put_item(
                 Item={
                     'username': username,
-                    'courseID': courseID
+                    'courseID': courseID,
+                    'courseName': courseName,
+                    'description': description,
+                    'price': price
                 }
             )
             return {
                 'statusCode': 200,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*'
+                },
                 'body': 'Data stored successfully in DynamoDB'
             }
         except ClientError as e:
             return {
                 'statusCode': 400,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*'
+                },
                 'body': e.response['Error']['Message']
             }
             
@@ -73,11 +85,17 @@ def lambda_handler(event, context):
             )
             return {
                 'statusCode': 200,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*'
+                },
                 'body': 'Data deleted successfully from DynamoDB'
             }
         except ClientError as e:
             return {
                 'statusCode': 400,
+                'headers': {
+                    'Access-Control-Allow-Origin': '*'
+                },
                 'body': e.response['Error']['Message']
             }
             
@@ -86,9 +104,9 @@ def lambda_handler(event, context):
         return {
             'statusCode': 400,
             'body': 'Unsupported HTTP method'
-    }
+        }
 
-    # api: https://v9v2zwoza6.execute-api.us-east-2.amazonaws.com/prod/bookmarks/username=? for GET Request
-    # api: https://v9v2zwoza6.execute-api.us-east-2.amazonaws.com/prod/bookmarks/username=?&courseID=? for DELETE Request
+    # api: https://v9v2zwoza6.execute-api.us-east-2.amazonaws.com/prod/bookmarks?username=? for GET Request
+    # api: https://v9v2zwoza6.execute-api.us-east-2.amazonaws.com/prod/bookmarks?username=?&courseID=? for DELETE Request
     # DATABASE tableName: Bookmarks
     # Fields: username, courseID, courseName, description, price
