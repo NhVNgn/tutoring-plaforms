@@ -1,0 +1,10 @@
+{
+  "name": "authentication-backend",
+  "version": "1.0.0",
+  "author": "Group17",
+  "dependencies": {
+    "aws-sdk": "^2.1331.0",
+    "bcryptjs": "2.4.3",
+    "jsonwebtoken": "9.0.0"
+  }
+}
