@@ -28,7 +28,9 @@ const Home = () => {
       setBookmarkedCourses(bookmarks.map(b => b.courseID));
     }
     fetchData();
+    // console.log(courses)
   }, []);
+
 
   // toggle bookmark
   const toggleBookmark = async (course, index) => {
