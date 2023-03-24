@@ -101,7 +101,7 @@ const Home = () => {
                 <h4>{course.courseName.S}</h4>
                 <p className="course-desc">{course.description.S}</p>
                 <div className="link-price">
-                  <p className="price">{course.price.S}</p>
+                  <p className="price">{"$" + course.price.S}</p>
                 </div>
               </div>
             </div>
