@@ -4,7 +4,6 @@
 
 import React, { useState, useEffect } from "react";
 import './css/profile.css';
-import './AddCourse'
 import AddCourse from "./AddCourse";
 
 const Profile = () => {
