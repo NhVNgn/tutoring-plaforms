@@ -30,15 +30,15 @@ const Home = () => {
     fetchData();
     
     // process course detail
-    for(let i = 0; i < courses.length; i++){
-      let course = courses[i].detail.M
-      // console.log("items", items)
-      for (const chapter in course){
-        let ch = course[chapter].SS
-        console.log("chapter", chapter, ch)
-      }
-    }
-    console.log(courses)
+    // for(let i = 0; i < courses.length; i++){
+    //   let course = courses[i].detail.M
+    //   // console.log("items", items)
+    //   for (const chapter in course){
+    //     let ch = course[chapter].SS
+    //     console.log("chapter", chapter, ch)
+    //   }
+    // }
+    // console.log(courses)
   }, []);
 
 
@@ -94,9 +94,6 @@ const Home = () => {
   return (
     <>
       <title>Home</title>
-      {courses.map((course, index) => {
-        <p>{course.detail.M.SS}</p>
-      })}
       <div className="wrapper">
         <h1>Courses</h1>
         <div className="separator"></div>
