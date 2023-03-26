@@ -21,6 +21,7 @@ const NavBar = ({ loggedUsername, setLoggedUsername }) => {
     // Clear username and sessionID from localStorage on logout
     localStorage.removeItem("username");
     localStorage.removeItem("sessionID");
+    localStorage.removeItem("role");
     setIsLoggedIn(false);
     setLoggedUsername("");
   };
