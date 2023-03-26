@@ -45,6 +45,7 @@ const Login = ({ loggedUsername, setLoggedUsername }) => {
             console.log(response_json);
             localStorage.setItem('username', response_json.username)
             localStorage.setItem('sessionID', response_json.sessionID)
+            localStorage.setItem('role', response_json.role)
             setLoggedUsername(response_json.username)
             navigate('/');
           } else if (response.status === 403) {
