@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import NavBar from "./pages/NavBar";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
+import Chat from "./pages/Chat";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="chat" element={<Chat />} />
         </Route>
       </Routes>
     </BrowserRouter>
