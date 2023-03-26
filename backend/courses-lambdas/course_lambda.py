@@ -26,7 +26,7 @@ def lambda_handler(event, context):
     elif action == 'GET':
         response = table.get_item(
             Key={
-                'id': event['id']
+                'courseID': event['courseID']
             }
         )
                         

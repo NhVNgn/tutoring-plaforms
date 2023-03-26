@@ -28,7 +28,19 @@ const Home = () => {
       setBookmarkedCourses(bookmarks.map(b => b.courseID));
     }
     fetchData();
+    
+    // process course detail
+    // for(let i = 0; i < courses.length; i++){
+    //   let course = courses[i].detail.M
+    //   // console.log("items", items)
+    //   for (const chapter in course){
+    //     let ch = course[chapter].SS
+    //     console.log("chapter", chapter, ch)
+    //   }
+    // }
+    // console.log(courses)
   }, []);
+
 
   // toggle bookmark
   const toggleBookmark = async (course, index) => {
@@ -99,7 +111,7 @@ const Home = () => {
                 <h4>{course.courseName.S}</h4>
                 <p className="course-desc">{course.description.S}</p>
                 <div className="link-price">
-                  <p className="price">{course.price.S}</p>
+                  <p className="price">{"$" + course.price.S}</p>
                 </div>
               </div>
             </div>

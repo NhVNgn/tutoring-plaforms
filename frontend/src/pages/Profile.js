@@ -4,10 +4,12 @@
 
 import React, { useState, useEffect } from "react";
 import './css/profile.css';
+import AddCourse from "./AddCourse";
 
 const Profile = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [showAddCourse, setShowAddCourse] = useState(false)
 
   // test call to profile lambda
   useEffect(() => {
@@ -20,10 +22,21 @@ const Profile = () => {
     fetchData();
   }, []);
 
+  const handleClickAddCourse = (event) => {
+    // toggle shown state
+    setShowAddCourse(current => !current);
+  };
+
   return (
     <>
       <title>Profile</title>
       <p>lol</p>
+
+      {/* if role === 'tutor', show AddCourse option */}
+      <button type ="button" className="btn btn-primary" onClick={handleClickAddCourse}>Add a course</button>
+      {showAddCourse ? (
+          <AddCourse />
+      ) : null}
     </>
   );
 }
