@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import './css/home.css';
 
 const Bookmarks = () => {
@@ -73,6 +74,9 @@ const Bookmarks = () => {
                     <p className="course-desc">{bookmark.description}</p>
                     <div className="link-price">
                       <p className="price">{bookmark.price}</p>
+                      {console.log(bookmark)}
+                      {console.log(bookmark.courseID)}
+                      {/* <Link className="nav-link" to="/coursedetail" state={{ from: bookmark.courseID }}>View Course</Link> */}
                     </div>
                   </div>
                 </div>
