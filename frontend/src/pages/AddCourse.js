@@ -8,6 +8,7 @@ const AddCourse = () => {
     const [description, setDescription] = useState("");
     const [category, setCategory] = useState("");
     const [price, setPrice] = useState("");
+    const [tutor, setTutor] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
 
@@ -31,6 +32,10 @@ const AddCourse = () => {
         setPrice(event.target.value);
     };
 
+    const handleTutorChange = (event) => {
+        setTutor(event.target.value);
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
        
@@ -42,6 +47,7 @@ const AddCourse = () => {
                 description: description,
                 category: category,
                 price: price,
+                tutor: tutor,
                 startDate: startDate,
                 endDate: endDate
             };
@@ -62,6 +68,7 @@ const AddCourse = () => {
         setCourseName("");
         setDescription("");
         setPrice("");
+        setTutor("");
     };
 
     return (
@@ -89,6 +96,10 @@ const AddCourse = () => {
                     <div className="form-group">
                         <label>Price:</label>
                         <input type="text" className="form-control" id="price" placeholder="Enter a number: 60, 40.99" value={price} onChange={handlePriceChange} required />
+                    </div>
+                    <div className="form-group">
+                        <label>Tutor:</label>
+                        <input type="text" className="form-control" id="tutor" placeholder="Enter tutor's name: Tony Stark, Steve Rogers" value={tutor} onChange={handleTutorChange} required />
                     </div>
                     <button type="submit" className="btn btn-primary" onSubmit={handleSubmit}>Add Course</button>
                 </form>

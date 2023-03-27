@@ -59,7 +59,7 @@ const Home = () => {
   const toggleBookmark = async (course, index) => {
     const bookmark = {
       username: username,
-      courseID: String(index),
+      courseID: course.courseID.S,
       courseName: course.courseName.S,
       description: course.description.S,
       price: course.price.S
@@ -112,7 +112,7 @@ const Home = () => {
         <div className="separator"></div>
         <div className="courses-container">
           {courses.map((course, index) => {
-            const isBookmarked = bookmarkedCourses.includes(String(index));
+            const isBookmarked = bookmarkedCourses.includes(course.courseID.S);
             return (
               <div className="course-item" key={index}>
                 <div className="course-header" style={{ background: `${colours[index]}` }}>

@@ -1,6 +1,7 @@
 import { set } from "mongoose";
 import React, { useState, useEffect } from "react";
 import { json, useLocation } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 import './css/coursedetails.css';
 
 const CourseDetail = () => {
@@ -9,6 +10,8 @@ const CourseDetail = () => {
     console.log(from);
 
     const [coursesLocal, setCoursesLocal] = useState([]);
+
+    //{chapter: "chap 1", subheading:"topic1, topic2"}, {chapter: "chap 2", subheading:"topic1, topic2"}
 
     // fetch courses
     useEffect(() => {
@@ -52,16 +55,15 @@ const CourseDetail = () => {
         <div>
             {console.log(coursesLocal)}
             {coursesLocal.map(course => {
-                console.log(course.detail.M);
-                const detailKeys = Object.keys(course.detail.M);
-                const detailValues = Object.values(course.detail.M);
+                // const detailKeys = Object.keys(course.detail.M);
+                // const detailValues = Object.values(course.detail.M);
                 return (
                     <div key={course} className="cwrapper">
                         <h1>{course.courseName.S}</h1>
                         <p className="cdescription">{course.description.S}</p>
                         <div>
                             <h4 className="content-heading">Course Content</h4>
-                            {detailKeys.sort(compareFn).map((key, index) => {
+                            {/* {detailKeys.sort(compareFn).map((key, index) => {
                                 return (
                                     <div key={key}>
                                         <h5>{key}</h5>
@@ -74,8 +76,9 @@ const CourseDetail = () => {
                                         </ul>
                                     </div>
                                 )
-                            })}
+                            })} */}
                         </div>
+                        <Link className="nav-link chat-button" to="/chat" state={{ }}>Chat with Tutor</Link>
                         <div className="price-wrapper">
                             <h4>Price: ${course.price.S}</h4>
                         </div>

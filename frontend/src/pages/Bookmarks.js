@@ -76,7 +76,7 @@ const Bookmarks = () => {
                       <p className="price">{bookmark.price}</p>
                       {console.log(bookmark)}
                       {console.log(bookmark.courseID)}
-                      {/* <Link className="nav-link" to="/coursedetail" state={{ from: bookmark.courseID }}>View Course</Link> */}
+                      <Link className="nav-link" to="/coursedetail" state={{ from: bookmark.courseID }}>View Course</Link>
                     </div>
                   </div>
                 </div>
