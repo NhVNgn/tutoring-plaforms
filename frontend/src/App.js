@@ -9,11 +9,11 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Chat from "./pages/Chat";
 import CourseDetail from "./pages/CourseDetail";
+import ChatUsersHistory from "./pages/ChatUsersHistory";
 
 export default function App() {
 
   const [loggedUsername, setLoggedUsername] = useState("");
-  var isLoggedIn = (loggedUsername) ? true : false;
 
   return (
     <BrowserRouter>
@@ -26,6 +26,7 @@ export default function App() {
           <Route path="register" element={<Register />} />
           <Route path="profile" element={<Profile />} />
           <Route path="chat" element={<Chat />} />
+          <Route path="chathistory" element={<ChatUsersHistory />} />
           <Route path="coursedetail" element={<CourseDetail />} />
         </Route>
       </Routes>

@@ -1,12 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import './css/home.css';
 
 const Home = () => {
   const [courses, setCourses] = useState([]);
   const [bookmarkedCourses, setBookmarkedCourses] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const colours = ["#EDAA6C", "#EA713D", "#D83E27", "#152B53", "#1F6E8E", "#2C8B98", "#82A8A0"];
   var username = localStorage.getItem("username");
+
+  useEffect(() => {
+    // Check if user is logged in by checking if username exists in localStorage
+    const storedUsername = localStorage.getItem("username");
+    if (storedUsername) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
   // fetch courses and bookmarked courses on mount
   useEffect(() => {
@@ -105,9 +116,12 @@ const Home = () => {
             return (
               <div className="course-item" key={index}>
                 <div className="course-header" style={{ background: `${colours[index]}` }}>
+                { isLoggedIn ?
                 <button className="bookmark" onClick={() => toggleBookmark(course, index)}> 
                     <i className={`fa ${isBookmarked ? "fa-bookmark" : "fa-bookmark-o"} fa-3x`}></i>
-                  </button>
+                  </button> 
+                  : <span></span>
+                }
                 </div>
                 <div className="course-item-text">
                 <h4>{course.courseName.S}</h4>

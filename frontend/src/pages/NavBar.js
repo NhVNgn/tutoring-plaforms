@@ -15,7 +15,7 @@ const NavBar = ({ loggedUsername, setLoggedUsername }) => {
       setIsLoggedIn(false);
       setLoggedUsername("");
     }
-  }, [loggedUsername]);
+  }, [loggedUsername, setLoggedUsername]);
 
   const handleLogout = () => {
     // Clear username and sessionID from localStorage on logout
@@ -50,9 +50,9 @@ const NavBar = ({ loggedUsername, setLoggedUsername }) => {
                 <Link className="nav-link" to="/profile">{loggedUsername}'s Profile</Link>
               </li>
             )}
-            {!isLoggedIn && (
+            {isLoggedIn && (
               <li className="nav-item">
-                <Link className="nav-link" to="/register">Sign up</Link>
+                <Link className="nav-link" to="/chathistory">Chat</Link>
               </li>
             )}
             {isLoggedIn && (

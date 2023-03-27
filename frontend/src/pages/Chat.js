@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './css/chat.css';
 
 function Chat() {
@@ -8,6 +8,23 @@ function Chat() {
   const [chatHistory, setChatHistory] = useState([]);
   const [showChatHistory, setShowChatHistory] = useState(false);
   var username = localStorage.getItem("username");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    setUser2(searchParams.get('user2'));
+  }, []);
+
+
+  useEffect(() => {
+    // Check if user is logged in by checking if username exists in localStorage
+    const storedUsername = localStorage.getItem("username");
+    if (!storedUsername) {
+      navigate('/login'); // redirect to login page if not logged in
+    }
+  }, [navigate]);
+
 
 
   // send the message after submitting
@@ -73,32 +90,39 @@ function Chat() {
   });
 
   return (
-    <div className="chat-container">
-      <h1>Chat</h1>
-      {showChatHistory && (
-        <div className="chat-history-container">
-          <ul className="chat-history">
-            {chatHistory.map((chatMessage, index) => (
-              <li className={`chat-message ${chatMessage.user1 === username ? 'sent' : 'received'}`} key={index}>
-                <div className="chat-message-content">{chatMessage.message}</div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+    <>
+      <div className="chat-container">
+        <h1>Chat</h1>
+      </div>
+      
+      <div className="separator"></div>
+      
+      <div className="chat-container">
+        {showChatHistory && (
+          <div className="chat-history-container">
+            <ul className="chat-history">
+              {chatHistory.map((chatMessage, index) => (
+                <li className={`chat-message ${chatMessage.user1 === username ? 'sent' : 'received'}`} key={index}>
+                  <div className="chat-message-content">{chatMessage.message}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
 
-      <form className="chat-form" onSubmit={handleSubmit}>
-        <label>
-          User 2:
-          <input type="text" value={user2} onChange={handleUser2Change} />
-        </label>
-        <label>
-          Message:
-          <input type="text" value={message} onChange={handleMessageChange} />
-        </label>
-        <button type="submit">Send</button>
-      </form>
-    </div> 
+        <form className="chat-form" onSubmit={handleSubmit}>
+          {/* <label>
+            User 2:
+            <input type="text" value={user2} onChange={handleUser2Change} />
+          </label> */}
+          <label>
+            Message:
+            <input type="text" value={message} onChange={handleMessageChange} />
+          </label>
+          <button type="submit">Send</button>
+        </form>
+      </div> 
+    </>
   );
 }
 
