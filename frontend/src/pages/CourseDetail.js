@@ -1,6 +1,7 @@
 import { set } from "mongoose";
 import React, { useState, useEffect } from "react";
 import { json, useLocation } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 import './css/coursedetails.css';
 
 const CourseDetail = () => {
@@ -76,6 +77,7 @@ const CourseDetail = () => {
                                 )
                             })}
                         </div>
+                        <Link className="nav-link chat-button" to="/chat" state={{ }}>Chat with Tutor</Link>
                         <div className="price-wrapper">
                             <h4>Price: ${course.price.S}</h4>
                         </div>
