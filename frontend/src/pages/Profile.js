@@ -11,6 +11,7 @@ const Profile = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [showAddCourse, setShowAddCourse] = useState(false)
+  const [isTutor, setIsTutor] = useState(false)
 
   // test call to profile lambda
   useEffect(() => {
@@ -23,6 +24,9 @@ const Profile = () => {
       const username = localStorage.getItem("username");
       const sessionID = localStorage.getItem("sessionID");
       const role = localStorage.getItem("role");
+
+      setIsTutor(role === "tutor");
+      console.log(isTutor);
 
       console.log(username);
       console.log(sessionID);
@@ -53,13 +57,16 @@ const Profile = () => {
       <p>
 
       </p>
-      {/* if role === 'tutor', show AddCourse option */}
-      <button type ="button" className="btn btn-primary" onClick={handleClickAddCourse}>Add a course</button>
-      {showAddCourse ? (
-          <AddCourse />
-      ) : null}
+      {isTutor && (
+        <div>
+          <button type ="button" className="btn btn-primary" onClick={handleClickAddCourse}>Add a course</button>
+          {showAddCourse ? (
+            <AddCourse />
+          ) : null}
+        </div>
+      )}
     </>
   );
 }
-  
+
 export default Profile;
