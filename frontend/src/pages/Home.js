@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import './css/home.css';
 
 const Home = () => {
@@ -113,6 +114,7 @@ const Home = () => {
                 <p className="course-desc">{course.description.S}</p>
                 <div className="link-price">
                   <p className="price">{"$" + course.price.S}</p>
+                  <Link className="nav-link" to="/coursedetail" state={{ from: course.courseID.S }}>View Course</Link>
                 </div>
               </div>
             </div>

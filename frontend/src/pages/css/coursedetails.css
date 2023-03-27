@@ -1,0 +1,20 @@
+
+.cwrapper{
+    padding: 40px;
+}
+
+.cdescription{
+    max-width: 60%;
+    margin: 20px 0;
+}
+
+.price-wrapper{
+    text-align: right;
+    margin-right: 50px;
+}
+
+.content-heading{
+    margin-bottom: 20px;
+    border-bottom: 1px solid black;
+    width: 50%;
+}

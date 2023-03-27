@@ -47,7 +47,7 @@ const NavBar = ({ loggedUsername, setLoggedUsername }) => {
             </li>
             {isLoggedIn && (
               <li className="nav-item">
-                <Link className="nav-link" to="/profile">Profile: {loggedUsername}</Link>
+                <Link className="nav-link" to="/profile">{loggedUsername}'s Profile</Link>
               </li>
             )}
             {!isLoggedIn && (

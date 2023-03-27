@@ -8,6 +8,7 @@ import NavBar from "./pages/NavBar";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Chat from "./pages/Chat";
+import CourseDetail from "./pages/CourseDetail";
 
 export default function App() {
 
@@ -25,6 +26,7 @@ export default function App() {
           <Route path="register" element={<Register />} />
           <Route path="profile" element={<Profile />} />
           <Route path="chat" element={<Chat />} />
+          <Route path="coursedetail" element={<CourseDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>
