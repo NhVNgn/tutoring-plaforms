@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import './css/chat.css';
 
 function Chat() {
-  const [user1, setUser1] = useState('');
   const [user2, setUser2] = useState('');
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const [showChatHistory, setShowChatHistory] = useState(false);
+  var username = localStorage.getItem("username");
 
+
+  // send the message after submitting
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const msg = {
-      user1: user1,
+      user1: username,
       user2: user2,
       message: message
     };
@@ -33,10 +36,6 @@ function Chat() {
     }
   };
 
-  const handleUser1Change = (event) => {
-    setUser1(event.target.value);
-  };
-
   const handleUser2Change = (event) => {
     setUser2(event.target.value);
   };
@@ -47,7 +46,7 @@ function Chat() {
 
   const fetchChatHistory = async () => {
     try {
-      const response = await fetch(`https://y8936siadk.execute-api.us-east-2.amazonaws.com/dev/chatmessage?user1=${user1}&user2=${user2}`);
+      const response = await fetch(`https://y8936siadk.execute-api.us-east-2.amazonaws.com/dev/chatmessage?user1=${username}&user2=${user2}`);
       const data = await response.json();
       setChatHistory(data);
     } catch (error) {
@@ -55,8 +54,9 @@ function Chat() {
     }
   };
 
+
   useEffect(() => {
-    if (user1 && user2) {
+    if (username && user2) {
       setShowChatHistory(true);
       fetchChatHistory();
     } else {
@@ -67,7 +67,7 @@ function Chat() {
   useEffect(() => {
     const interval = setInterval(() => {
       fetchChatHistory();
-    }, 1000);
+    }, 10000);
 
     return () => clearInterval(interval);
   });
@@ -79,7 +79,7 @@ function Chat() {
         <div className="chat-history-container">
           <ul className="chat-history">
             {chatHistory.map((chatMessage, index) => (
-              <li className={`chat-message ${chatMessage.user1 === user1 ? 'sent' : 'received'}`} key={index}>
+              <li className={`chat-message ${chatMessage.user1 === username ? 'sent' : 'received'}`} key={index}>
                 <div className="chat-message-content">{chatMessage.message}</div>
               </li>
             ))}
@@ -88,10 +88,6 @@ function Chat() {
       )}
 
       <form className="chat-form" onSubmit={handleSubmit}>
-        <label>
-          User 1:
-          <input type="text" value={user1} onChange={handleUser1Change} />
-        </label>
         <label>
           User 2:
           <input type="text" value={user2} onChange={handleUser2Change} />
@@ -102,7 +98,7 @@ function Chat() {
         </label>
         <button type="submit">Send</button>
       </form>
-    </div>
+    </div> 
   );
 }
 

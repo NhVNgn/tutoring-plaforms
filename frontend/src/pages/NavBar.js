@@ -26,6 +26,7 @@ const NavBar = ({ loggedUsername, setLoggedUsername }) => {
     setLoggedUsername("");
   };
 
+
   return (
     <>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -39,7 +40,7 @@ const NavBar = ({ loggedUsername, setLoggedUsername }) => {
               <Link className="nav-link" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/bookmarks">Bookmarks</Link>
+              <Link className="nav-link" to={isLoggedIn? "/bookmarks" : "/login"}>Bookmarks</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/about">About</Link>

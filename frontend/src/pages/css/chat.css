@@ -80,12 +80,13 @@
   .chat-message.sent .chat-message-content {
     width: 20rem;
     background-color: #3b5998;
-    align-self: flex-end;
+    align-self: flex-start;
   }
   
   .chat-message.received .chat-message-content {
     width: 20rem;
     background-color: #c1d186;
+    align-self: flex-end;
   }
   
   @media (max-width: 768px) {

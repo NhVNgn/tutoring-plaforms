@@ -12,7 +12,7 @@ import Chat from "./pages/Chat";
 export default function App() {
 
   const [loggedUsername, setLoggedUsername] = useState("");
-
+  var isLoggedIn = (loggedUsername) ? true : false;
 
   return (
     <BrowserRouter>
