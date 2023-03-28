@@ -11,8 +11,6 @@ const CourseDetail = () => {
 
     const [coursesLocal, setCoursesLocal] = useState([]);
 
-    //{chapter: "chap 1", subheading:"topic1, topic2"}, {chapter: "chap 2", subheading:"topic1, topic2"}
-
     // fetch courses
     useEffect(() => {
         const fetchData = async () => {
@@ -36,39 +34,31 @@ const CourseDetail = () => {
 
     }, []);
 
-    // order by chapter
-    function compareFn(a, b) {
-        a = a.charAt(8);
-        b = b.charAt(8);
-        const aNum = parseInt(a);
-        const bNum = parseInt(b);
-        if (aNum < bNum) {
-            return -1;
-        } else if (aNum > bNum) {
-            return 1;
-        } else {
-            return 0;
-        }
+    // split subheadings
+    function splitString(str) {
+        str = str.split(",");
+        return str;
     }
 
     return (
         <div>
             {console.log(coursesLocal)}
             {coursesLocal.map(course => {
-                // const detailKeys = Object.keys(course.detail.M);
-                // const detailValues = Object.values(course.detail.M);
+                let courseContent = course.detail.L;
                 return (
                     <div key={course} className="cwrapper">
                         <h1>{course.courseName.S}</h1>
                         <p className="cdescription">{course.description.S}</p>
                         <div>
                             <h4 className="content-heading">Course Content</h4>
-                            {/* {detailKeys.sort(compareFn).map((key, index) => {
+                            {courseContent.map((content,index) => {
+                                let contentArr = content.M;
+                                let subheadingArr = splitString(contentArr.subheader.S);
                                 return (
-                                    <div key={key}>
-                                        <h5>{key}</h5>
+                                    <div key={index}>
+                                        <h5>Chapter {index + 1}: {contentArr.chapter.S}</h5>
                                         <ul>
-                                            {detailValues[index].SS.map((value, index) => {
+                                            {subheadingArr.map((value, index) => {
                                                 return (
                                                     <li key={index}>{value}</li>
                                                 )
@@ -76,7 +66,7 @@ const CourseDetail = () => {
                                         </ul>
                                     </div>
                                 )
-                            })} */}
+                            })}
                         </div>
                         <Link className="nav-link chat-button" to="/chat" state={{ }}>Chat with Tutor</Link>
                         <div className="price-wrapper">
