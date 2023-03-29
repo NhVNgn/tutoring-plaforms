@@ -1,96 +1,49 @@
-.wrapper{
-    padding: 50px;
-}
+/* Custom CSS */
 
-.separator{
-    height: 2px;
-    background: #f1f1f1;
-    margin: 20px 0;
-}
-
-.courses-container{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 50px;
-    gap: 70px;
-}
-
-.course-item{
-    max-width: 350px;
-    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-.course-header{
-    height: 100px;
-    border-radius: 10px 10px 0 0;
-    background: #f1f1f1;
-}
-
-.course-item-text{
+.container {
+    max-width: 500px;
+    margin: auto;
     padding: 20px;
-    flex: 1 auto;
-    display: flex;
-    flex-direction: column;
-}
-
-.course-desc{
-    font-size: 12px;
-    margin-top: 15px;
-    margin-bottom: 30px;
-}
-
-.link-price{
-    margin-top: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.link{
-    color: gray;
-}
-
-.link:hover{
-    cursor: pointer;
-}
-
-.price{
-    font-weight: 600;
-    font-size: 18px;
-    margin-bottom: 0;
-}
-
-
-/* Tooltip text */
-.tooltiptext {
-    visibility: hidden;
-    width: 120px;
-    background-color: #555;
+    border: solid rgb(197, 184, 184) 0.5px
+  }
+  
+  @media screen and (max-width: 580px) {
+    .container {
+      padding: 10px;
+    }
+  }
+  
+  .btn-student {
+    background-color: #007bff;
     color: #fff;
+  }
+  
+  .btn-tutor {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .btn-student:hover {
+    background-color: #0062cc;
+  }
+  
+  .btn-tutor:hover {
+    background-color: #1e7e34;
+  }
+  
+  .btn-group {
+    margin-left: 17%;
+  }
+  
+  
+  .heading {
     text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 1;
+    margin-bottom: 5%;
   }
   
-  /* Tooltip arrow */
-  .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-  }
   
-  /* Show the tooltip text when you mouse over the tooltip container */
-  .bookmark:hover .tooltiptext {
-    visibility: visible;
-  }
+  /* .form-group-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  } */
