@@ -11,8 +11,7 @@ import json
 import boto3
 sts_client = boto3.client('sts')
 sts_response = sts_client.assume_role(RoleArn='arn:aws:iam::897858504723:role/dynamodb-fullaccess',
-                                          RoleSessionName='test',
-                                          DurationSeconds=900)
+                                          RoleSessionName='test')
     
 my_dynamodb_client = boto3.client('dynamodb', region_name='us-east-2', 
                                   aws_access_key_id=sts_response['Credentials']['AccessKeyId'],

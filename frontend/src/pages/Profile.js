@@ -39,6 +39,10 @@ async function isValidUserSession(username, sessionID) {
     .catch(error => console.log('error', error));
 }
 
+function isPasswordCorrect(user_input, hashed_password_from_db) {
+  return bcrypt.compareSync(user_input, hashed_password_from_db);
+}
+
 const Profile = () => {
   //const [username, setUsername] = useState('');
   // const [email, setEmail] = useState('');
@@ -46,11 +50,11 @@ const Profile = () => {
   // const [isTutor, setIsTutor] = useState(false)
   const [currentPasswordFromUser, setCurrentPasswordFromUser] = useState('')
   const [newpassword, setNewPassword] = useState('')
-  const [currentPasswordDB, setCurrentPasswordDB] = useState('')
-  var username = localStorage.getItem("username")
-  var sessionID = localStorage.getItem("sessionID")
-  var role = localStorage.getItem("role")
-  var isTutor = (role === "tutor")
+  const [currentPasswordDBHashed, setCurrentPasswordDBHashed] = useState('')
+  const username = localStorage.getItem("username")
+  const sessionID = localStorage.getItem("sessionID")
+  const role = localStorage.getItem("role")
+  const isTutor = (role === "tutor")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,10 +74,9 @@ const Profile = () => {
       );
       console.log(user_info);
       console.log(username);
-      console.log(sessionID);
       console.log(role);
 
-      setCurrentPasswordDB(user_info['info_on_user']['password']['S']);
+      setCurrentPasswordDBHashed(user_info['info_on_user']['password']['S']);
     }
     fetchData();
   }, []);
@@ -84,9 +87,6 @@ const Profile = () => {
   };
 
   const currentPasswordUserInput = (event) => {
-    console.log('current password from DB: ' + currentPasswordDB)
-    console.log("event:");
-    console.log(event.target.value);
     setCurrentPasswordFromUser(event.target.value);
   };
 
@@ -97,58 +97,14 @@ const Profile = () => {
   const onSubmit = (event) => {
     // Check if the current password entered by the user is correct.
     event.preventDefault();
-
-    const checkPassword = async () => {
-      console.log("checkPassword called")
-      console.log("username: " + username)
-      console.log("currentPassword: " + currentPasswordFromUser)
-      const data = {
-        username: username,
-        password: currentPasswordFromUser
-      };
-
-      console.log(data);
-
-
-      const verifyPassword = await makeRequest(
-        "https://c4o69qqvt1.execute-api.us-east-2.amazonaws.com/dev/verifypassword",
-        "POST",
-        undefined,
-        data
-      );
-
-      console.log(verifyPassword);
-
-      console.log('new try done');
-
-      await fetch("https://c4o69qqvt1.execute-api.us-east-2.amazonaws.com/dev/verifypassword", {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify(data),
-        redirect: 'follow'
-      })
-        .then(async response => {
-          if (response.ok) {
-            let response_json = await response.json();
-            alert('success!');
-            console.log(response_json);
-          } else if (response.status === 403) {
-            alert('Invalid credentials.');
-          }
-          else {
-            console.log('unexpected case');
-            console.log(response);
-            alert(response.status);
-          }
-        })
-        .catch(error => console.log('error', error));
-
+    if (!isPasswordCorrect(currentPasswordFromUser, currentPasswordDBHashed)) {
+      alert('not the correct current password');
+      return;
     }
-    checkPassword();
-  };
-
-  const hashPassword = (password) => {
-    return bcrypt.hashSync(password.trim(), 10);
+    console.log('correct password given');
+    // Continue here - proceed with updating the password in the DB with the new password
+    // the user entered. Will have to write a POST method in the lambda to do this.
+    // Also make sure you hash it before storing in DB.
   };
 
   return (
