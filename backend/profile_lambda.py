@@ -24,12 +24,19 @@ def get_method(event, context):
     
     # Parse out query string params first (if GET method):
     username = event['queryStringParameters']['username']
+
+    # Get the user's row from the DB:
+
+    users_table = my_dynamodb_client.scan(TableName='users')['Items']
+    row_of_user = next((x for x in users_table if x['username']['S'] == username), 'None found in DB')
     
     # Next, construct the body of the response:
     
     responseBody = {}
     responseBody['username'] = username
     responseBody['message'] = 'henlo'
+    responseBody['info_on_user'] = row_of_user
+    # responseBody['userData2'] = users_table
     
     # Finally, construct an http response object:
     
