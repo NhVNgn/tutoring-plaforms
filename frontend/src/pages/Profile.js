@@ -27,10 +27,21 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log('hi')
       const allProfiles = await makeRequest(
-        `https://c4o69qqvt1.execute-api.us-east-2.amazonaws.com/dev/profile`, 'GET'
+        `https://yuibzyvw0j.execute-api.us-east-2.amazonaws.com/dev/userinfo?username=${username}`, 'GET'
       );
       console.log(allProfiles);
+
+      const testPOST = await makeRequest(
+        `https://yuibzyvw0j.execute-api.us-east-2.amazonaws.com/dev/userinfo`, 'POST',
+        undefined,
+        {
+          username: username,
+          sessionID: sessionID
+        }
+      );
+      console.log(testPOST);
 
       console.log(username);
       console.log(sessionID);
