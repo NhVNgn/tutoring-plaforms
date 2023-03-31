@@ -124,6 +124,7 @@ const CourseDetail = () => {
                             <h1>{course.courseName.S}</h1>
                         </div>
                         <p className="cdescription">{course.description.S}</p>
+                        <h5 className="tutor-text">📝 Tutor: {course.tutor.S}</h5>
                         <div>
                             <h4 className="content-heading">Course Content</h4>
                             {courseContent.map((content,index) => {
