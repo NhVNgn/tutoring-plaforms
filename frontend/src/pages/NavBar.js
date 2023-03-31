@@ -1,9 +1,9 @@
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 const NavBar = ({ loggedUsername, setLoggedUsername }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Check if user is logged in by checking if username exists in localStorage
@@ -17,15 +17,40 @@ const NavBar = ({ loggedUsername, setLoggedUsername }) => {
     }
   }, [loggedUsername, setLoggedUsername]);
 
+
+
   const handleLogout = () => {
     // Clear username and sessionID from localStorage on logout
     localStorage.removeItem("username");
     localStorage.removeItem("sessionID");
     localStorage.removeItem("role");
+    localStorage.removeItem("expire");
+    localStorage.removeItem("start");
     setIsLoggedIn(false);
     setLoggedUsername("");
+    navigate("/");
   };
 
+  useEffect(() => {
+    const storedStartTime = localStorage.getItem("start");
+    if (storedStartTime) {
+      const checkExpiration = setInterval(() => {
+        const currentTime = Math.floor(new Date().getTime() / 1000);
+
+        const expireTimestamp = parseInt(storedStartTime) + 5 * 60; // expire after 5 mins  
+
+        if (currentTime > expireTimestamp) {
+          console.log("logged out. session expired. Current time: ", currentTime, "ExpireTime: ", expireTimestamp)
+          handleLogout();
+        }
+        else {
+          // console.log("not yet", currentTime, expireTimestamp)
+        }
+      }, 1000); // invoke this function every 1 second
+
+      return () => clearInterval(checkExpiration);
+    }
+  }, [handleLogout]);
 
   return (
     <>
@@ -40,7 +65,7 @@ const NavBar = ({ loggedUsername, setLoggedUsername }) => {
               <Link className="nav-link" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to={isLoggedIn? "/bookmarks" : "/login"}>Bookmarks</Link>
+              <Link className="nav-link" to={isLoggedIn ? "/bookmarks" : "/login"}>Bookmarks</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/about">About</Link>
