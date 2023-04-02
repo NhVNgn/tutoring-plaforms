@@ -12,6 +12,8 @@ const CourseDetail = () => {
     const [coursesLocal, setCoursesLocal] = useState([]);
     const [bookmarkedCourses, setBookmarkedCourses] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [enrolled, setEnrolled] = useState(false);
+    // const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         // Check if user is logged in by checking if username exists in localStorage
@@ -106,6 +108,52 @@ const CourseDetail = () => {
         return str;
     }
 
+    // enroll feature starts here
+    useEffect(() => {
+      // Check if the course is already in the database
+      const fetchData = async () => {
+        // setLoading(true);
+        try {
+          const response = await fetch(`https://nn8vlbbju7.execute-api.us-east-2.amazonaws.com/dev/enrolstudents?username=${username}&courseID=${from}`);
+          if (response.ok) {
+            setEnrolled(true);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+        // setLoading(false);
+      };
+      fetchData();
+    }, [from, username]);
+
+    const handleEnrollments = async () => {
+      // setLoading(true);
+      try {
+        await fetch('https://nn8vlbbju7.execute-api.us-east-2.amazonaws.com/dev/enrolstudents', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            username: username,
+            courseID: from
+          })
+        });
+        setEnrolled(true);
+      } catch (error) {
+        console.error(error);
+      }
+      // setLoading(false);
+    };
+  
+    // if (loading) {
+    //   return <button disabled>Loading...</button>;
+    // }
+  
+    // if (enrolled) {
+    //   return <button disabled>Enrolled</button>;
+    // }
+
     return (
         <div>
             {console.log(coursesLocal)}
@@ -145,6 +193,12 @@ const CourseDetail = () => {
                             })}
                         </div>
                         <Link className="nav-link chat-button" to="/chat" state={{ }}>Chat with Tutor</Link>
+                        { username != null ? 
+                          !enrolled ?
+                            <button className="nav-link chat-button" onClick={handleEnrollments}>Enroll Now</button>
+                            : <button className="nav-link chat-button enrolled" disabled>Enrolled</button>
+                        : ""
+                        }
                         <div className="price-wrapper">
                             <h4>Price: ${course.price.S}</h4>
                         </div>
