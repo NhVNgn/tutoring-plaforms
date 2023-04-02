@@ -49,28 +49,33 @@ def get_method(event, context):
     
     return responseObject
     
-def post_method(event, context):
+def put_method(event, context):
     # Parse the request body:
     requestBody = json.loads(event['body'])
+    newPasswordHashed = requestBody['newPasswordHashed']
     username = requestBody['username']
-
-    # Construct the body of the response:
-    
-    responseBody = {}
-    # responseBody['username'] = username
-    responseBody['message'] = 'henlo'
-    responseBody['username'] = username
-    
-    # Finally, construct an http response object:
-    
     responseObject = {}
-    responseObject['statusCode'] = 200
+    responseBody = {}
+    try:
+        my_dynamodb_client.update_item(
+            TableName='users',
+            Key={'username': {'S': username}},
+            UpdateExpression='SET password = :newPasswordHashed',
+            ExpressionAttributeValues={
+                ':newPasswordHashed': {'S': newPasswordHashed}
+            }
+        )
+    except:
+        responseObject['statusCode'] = 500
+        responseBody['message'] = 'Exception raised - could not update password'
+    else:
+        responseObject['statusCode'] = 200
+        responseBody['message'] = 'Succeeded in updating password'
     responseObject['headers'] = {}
     responseObject['headers']['Content-Type'] = 'application/json'
     responseObject['headers']['Access-Control-Allow-Origin'] = '*'
     responseObject['headers']['Access-Control-Allow-Headers'] = '*'
     responseObject['body'] = json.dumps(responseBody)
-    
     return responseObject
     
 def lambda_handler(event, context):
@@ -80,5 +85,5 @@ def lambda_handler(event, context):
     http_method = event['httpMethod']
     if http_method == 'GET':
         return get_method(event, context)
-    elif http_method == 'POST':
-        return post_method(event, context)
+    elif http_method == 'PUT':
+        return put_method(event, context)
