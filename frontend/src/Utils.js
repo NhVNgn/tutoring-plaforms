@@ -14,7 +14,13 @@ export default async function makeRequest(apiLink, methodType,
           body: JSON.stringify(requestBody)
         });
       }
-      return await response.json();
+      const responseData = await response.json();
+      return {
+        ok: response.ok,
+        status: response.status,
+        headers: response.headers,
+        data: responseData
+      };
     } catch (error) {
       console.error(error);
     }

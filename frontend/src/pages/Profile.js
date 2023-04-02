@@ -13,7 +13,7 @@ const headers = {
   "Content-Type": "application/json",
 };
 
-async function isValidUserSession(username, sessionID) {
+async function checkIsValidUserSession(username, sessionID) {
   console.log('Checking if session valid for user ' + username);
   return await fetch("https://mscfwoqws8.execute-api.us-east-2.amazonaws.com/dev/verify", {
     method: 'POST',
@@ -43,14 +43,17 @@ function isPasswordCorrect(user_input, hashed_password_from_db) {
   return bcrypt.compareSync(user_input, hashed_password_from_db);
 }
 
+function hashPassword(password) {
+  return bcrypt.hashSync(password.trim(), 10);
+}
+
 const Profile = () => {
-  //const [username, setUsername] = useState('');
-  // const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [showAddCourse, setShowAddCourse] = useState(false)
-  // const [isTutor, setIsTutor] = useState(false)
   const [currentPasswordFromUser, setCurrentPasswordFromUser] = useState('')
   const [newpassword, setNewPassword] = useState('')
   const [currentPasswordDBHashed, setCurrentPasswordDBHashed] = useState('')
+  const [isValidUserSession, setIsValidUserSession] = useState(true)
   const username = localStorage.getItem("username")
   const sessionID = localStorage.getItem("sessionID")
   const role = localStorage.getItem("role")
@@ -58,13 +61,12 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log('hi')
-      let is_valid_session = await isValidUserSession(username, sessionID);
-      console.log('here');
+      let is_valid_session = await checkIsValidUserSession(username, sessionID);
 
       if (!is_valid_session) {
-        // Continue here - maybe log the user out, reroute to home page?
         alert('invalid session');
+        setIsValidUserSession(false);
+        return;
       } else {
         console.log('valid session!');
       }
@@ -76,7 +78,8 @@ const Profile = () => {
       console.log(username);
       console.log(role);
 
-      setCurrentPasswordDBHashed(user_info['info_on_user']['password']['S']);
+      setCurrentPasswordDBHashed(user_info.data['info_on_user']['password']['S']);
+      setEmail(user_info.data['info_on_user']['email']['S']);
     }
     fetchData();
   }, []);
@@ -94,27 +97,47 @@ const Profile = () => {
     setNewPassword(event.target.value);
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     // Check if the current password entered by the user is correct.
     event.preventDefault();
     if (!isPasswordCorrect(currentPasswordFromUser, currentPasswordDBHashed)) {
       alert('not the correct current password');
       return;
     }
-    console.log('correct password given');
-    // Continue here - proceed with updating the password in the DB with the new password
-    // the user entered. Will have to write a POST method in the lambda to do this.
-    // Also make sure you hash it before storing in DB.
+    console.log('correct current password given');
+    const newPasswordHashed = hashPassword(newpassword);
+    const response = await makeRequest(
+      `https://yuibzyvw0j.execute-api.us-east-2.amazonaws.com/dev/userinfo`, 'PUT',
+      undefined, {username: username, newPasswordHashed: newPasswordHashed}
+    );
+    console.log(response);
+    if (response.status == 200) {
+      setCurrentPasswordDBHashed(newPasswordHashed);
+      alert('Updated password!');
+    }
   };
 
   return (
     <div className="wrapper">
+      {isTutor && (
+      <div>
+        <button type ="button" className="btn btn-primary" onClick={handleClickAddCourse}>Add a course</button>
+        {showAddCourse ? ( <AddCourse /> ) : null}
+      </div>
+      )}
+      {isValidUserSession && email && (
       <div className="container">
       <title>Profile</title>
         <form onSubmit={onSubmit}>
-          <h2 className="heading">Profile</h2>
-          <div className="form-group">
-            <label htmlFor="role">You are:</label>
+          <h2 className="heading" style={{ textAlign: 'left' }}>Profile</h2>
+          <div className="form-group profile_info">
+            <label htmlFor="role">Your username: {username}</label>
+          </div>
+          <div className="form-group profile_info">
+            <label htmlFor="role">Your role: {role}</label>
+          </div>
+          <div className="form-group profile_info">
+            <label htmlFor="role">Your email: {email}</label>
           </div>
 
           <div className="form-group">
@@ -132,16 +155,8 @@ const Profile = () => {
           <button type="submit" className="btn btn-primary" onSubmit={onSubmit}>Update password</button>
 
         </form>
-
-        {isTutor && (
-          <div>
-            <button type ="button" className="btn btn-primary" onClick={handleClickAddCourse}>Add a course</button>
-            {showAddCourse ? (
-              <AddCourse />
-            ) : null}
-          </div>
-        )}
-        </div>
+      </div>
+      )}
     </div>
   );
 }
