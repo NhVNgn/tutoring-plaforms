@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./css/addcourse.css"
 
-const AddCourse = () => {
+function AddCourse({tutorUsername}) {
 
     const [courseID, setCourseID] = useState("");
     const [courseName, setCourseName] = useState("");
@@ -80,6 +80,7 @@ const AddCourse = () => {
                 category: category,
                 price: price,
                 tutor: tutor,
+                tutorUsername: tutorUsername,
                 startDate: startDate,
                 endDate: endDate
             };
@@ -94,6 +95,7 @@ const AddCourse = () => {
             const obj = JSON.parse(data.body);
             // console.log(obj)
             alert("Successfully added: " + obj)
+            console.log(newCourse)
         }
         add();
         setCourseID("");
