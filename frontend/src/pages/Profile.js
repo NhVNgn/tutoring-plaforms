@@ -122,7 +122,7 @@ const Profile = () => {
       {isTutor && (
       <div>
         <button type ="button" className="btn btn-primary" onClick={handleClickAddCourse}>Add a course</button>
-        {showAddCourse ? ( <AddCourse /> ) : null}
+        {showAddCourse ? ( <AddCourse tutorUsername={username}/> ) : null}
       </div>
       )}
       {isValidUserSession && email && (

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./css/addcourse.css"
 
-const AddCourse = () => {
+function AddCourse({tutorUsername}) {
 
     const [courseID, setCourseID] = useState("");
     const [courseName, setCourseName] = useState("");
@@ -10,9 +10,7 @@ const AddCourse = () => {
     const [price, setPrice] = useState("");
     const [tutor, setTutor] = useState("");
     const [detail, setDetail] = useState([]);
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
-
+    
     const handleCourseIDChange = (event) => {
         setCourseID(event.target.value);
     };
@@ -80,8 +78,7 @@ const AddCourse = () => {
                 category: category,
                 price: price,
                 tutor: tutor,
-                startDate: startDate,
-                endDate: endDate
+                tutorUsername: tutorUsername,
             };
             const response = await fetch("https://56j70ao9r7.execute-api.us-east-1.amazonaws.com/dev", {
                 method: 'POST',
@@ -94,12 +91,14 @@ const AddCourse = () => {
             const obj = JSON.parse(data.body);
             // console.log(obj)
             alert("Successfully added: " + obj)
+            console.log(newCourse)
         }
         add();
         setCourseID("");
         setCourseName("");
         setDescription("");
         setDetail([]);
+        setCategory("");
         setPrice("");
         setTutor("");
     };
