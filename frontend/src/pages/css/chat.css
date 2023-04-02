@@ -107,15 +107,17 @@
 
   .user-list {
     margin: 0 5rem;
-    padding: 0;
+    padding: 1rem;
     font-size: large;
     align-self: center;
     display: flex;
+    flex-direction: column;
     justify-content: left;
   }
   
   .user-item {
     padding: 0.5rem;
+    border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
     cursor: pointer;
   }
