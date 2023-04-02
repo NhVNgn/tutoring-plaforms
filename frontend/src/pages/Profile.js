@@ -112,12 +112,19 @@ const Profile = () => {
     );
     console.log(response);
     if (response.status == 200) {
-      setCurrentPasswordDBHashed(newPasswordHashed)
+      setCurrentPasswordDBHashed(newPasswordHashed);
+      alert('Updated password!');
     }
   };
 
   return (
     <div className="wrapper">
+      {isTutor && (
+      <div>
+        <button type ="button" className="btn btn-primary" onClick={handleClickAddCourse}>Add a course</button>
+        {showAddCourse ? ( <AddCourse /> ) : null}
+      </div>
+      )}
       {isValidUserSession && email && (
       <div className="container">
       <title>Profile</title>
@@ -148,15 +155,6 @@ const Profile = () => {
           <button type="submit" className="btn btn-primary" onSubmit={onSubmit}>Update password</button>
 
         </form>
-
-        {isTutor && (
-          <div>
-            <button type ="button" className="btn btn-primary" onClick={handleClickAddCourse}>Add a course</button>
-            {showAddCourse ? (
-              <AddCourse />
-            ) : null}
-          </div>
-        )}
       </div>
       )}
     </div>
