@@ -10,9 +10,7 @@ function AddCourse({tutorUsername}) {
     const [price, setPrice] = useState("");
     const [tutor, setTutor] = useState("");
     const [detail, setDetail] = useState([]);
-    const [startDate, setStartDate] = useState("");
-    const [endDate, setEndDate] = useState("");
-
+    
     const handleCourseIDChange = (event) => {
         setCourseID(event.target.value);
     };
@@ -81,8 +79,6 @@ function AddCourse({tutorUsername}) {
                 price: price,
                 tutor: tutor,
                 tutorUsername: tutorUsername,
-                startDate: startDate,
-                endDate: endDate
             };
             const response = await fetch("https://56j70ao9r7.execute-api.us-east-1.amazonaws.com/dev", {
                 method: 'POST',
