@@ -129,14 +129,14 @@ const Profile = () => {
       <div className="container">
       <title>Profile</title>
         <form onSubmit={onSubmit}>
-          <h2 className="heading">Profile</h2>
-          <div className="form-group label-centered profile_info">
+          <h2 className="heading" style={{ textAlign: 'left' }}>Profile</h2>
+          <div className="form-group profile_info">
             <label htmlFor="role">Your username: {username}</label>
           </div>
-          <div className="form-group label-centered profile_info">
+          <div className="form-group profile_info">
             <label htmlFor="role">Your role: {role}</label>
           </div>
-          <div className="form-group label-centered profile_info">
+          <div className="form-group profile_info">
             <label htmlFor="role">Your email: {email}</label>
           </div>
 
