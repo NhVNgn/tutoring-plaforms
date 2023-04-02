@@ -1,5 +1,6 @@
-import { Outlet, Link, useNavigate } from "react-router-dom";
+import { Outlet, Link, useNavigate, NavLink } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import './css/navbar.css';
 
 const NavBar = ({ loggedUsername, setLoggedUsername }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -54,45 +55,59 @@ const NavBar = ({ loggedUsername, setLoggedUsername }) => {
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <Link className="navbar-brand" to="/">365 Tutor</Link>
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item active">
-              <Link className="nav-link" to="/">Home</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to={isLoggedIn ? "/mylibrary" : "/login"}>My Library</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/about">About</Link>
-            </li>
-            {isLoggedIn && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/profile">{loggedUsername}'s Profile</Link>
-              </li>
-            )}
-            {isLoggedIn && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/chathistory">Chat</Link>
-              </li>
-            )}
-            {isLoggedIn && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/" onClick={handleLogout}>Logout</Link>
-              </li>
-            )}
-            {!isLoggedIn && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">Login</Link>
-              </li>
-            )}
-          </ul>
-        </div>
-      </nav>
+  <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <Link className="navbar-brand" to="/">365 Tutor</Link>
+    <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon"></span>
+    </button>
+    <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul className="navbar-nav">
+        <li className="nav-item">
+          <NavLink exact activeClassName="active" className="nav-link" to="/">
+            Home
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink activeClassName="active" className="nav-link" to={isLoggedIn ? "/mylibrary" : "/login"}>
+            My Library
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink activeClassName="active" className="nav-link" to="/about">
+            About
+          </NavLink>
+        </li>
+        {isLoggedIn && (
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to="/profile">
+              {loggedUsername}'s Profile
+            </NavLink>
+          </li>
+        )}
+        {isLoggedIn && (
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to="/chathistory">
+              Chat
+            </NavLink>
+          </li>
+        )}
+        {isLoggedIn && (
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to="/" onClick={handleLogout}>
+              Logout
+            </NavLink>
+          </li>
+        )}
+        {!isLoggedIn && (
+          <li className="nav-item">
+            <NavLink activeClassName="active" className="nav-link" to="/login">
+              Login
+            </NavLink>
+          </li>
+        )}
+      </ul>
+    </div>
+  </nav>
       <Outlet />
     </>
   )
