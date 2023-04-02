@@ -98,6 +98,7 @@ function AddCourse({tutorUsername}) {
         setCourseName("");
         setDescription("");
         setDetail([]);
+        setCategory("");
         setPrice("");
         setTutor("");
     };
