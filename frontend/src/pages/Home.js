@@ -38,6 +38,7 @@ const Home = () => {
       // fetch bookmarked courses
       const bookmarkResponse = await fetch(`https://v9v2zwoza6.execute-api.us-east-2.amazonaws.com/prod/bookmarks?username=${username}`);
       const bookmarks = await bookmarkResponse.json();
+      console.log(bookmarks);
       setBookmarkedCourses(bookmarks.map(b => b.courseID));
     }
     fetchData();

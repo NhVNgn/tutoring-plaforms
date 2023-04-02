@@ -94,3 +94,18 @@
   .bookmark:hover .tooltiptext {
     visibility: visible;
   }
+
+  .library h1 {
+    display: flex;
+    justify-content: center;
+  }
+
+  .lib-separator {
+    padding-bottom: 1rem;
+  }
+
+  .about section {
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+  }
+

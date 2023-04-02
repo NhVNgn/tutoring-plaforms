@@ -37,7 +37,7 @@ const NavBar = ({ loggedUsername, setLoggedUsername }) => {
       const checkExpiration = setInterval(() => {
         const currentTime = Math.floor(new Date().getTime() / 1000);
 
-        const expireTimestamp = parseInt(storedStartTime) + 5 * 60; // expire after 5 mins  
+        const expireTimestamp = parseInt(storedStartTime) + 30 * 60; // expire after 5 mins  
 
         if (currentTime > expireTimestamp) {
           console.log("logged out. session expired. Current time: ", currentTime, "ExpireTime: ", expireTimestamp)
@@ -65,7 +65,7 @@ const NavBar = ({ loggedUsername, setLoggedUsername }) => {
               <Link className="nav-link" to="/">Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to={isLoggedIn ? "/bookmarks" : "/login"}>Bookmarks</Link>
+              <Link className="nav-link" to={isLoggedIn ? "/mylibrary" : "/login"}>My Library</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/about">About</Link>

@@ -41,3 +41,6 @@
 .tutor-text{
     margin-bottom: 25px;
 }
+.enrolled {
+    background-color: gray;
+}
