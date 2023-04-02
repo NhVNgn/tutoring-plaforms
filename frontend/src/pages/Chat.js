@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { json, useLocation } from 'react-router-dom';
 import './css/chat.css';
 
 function Chat() {
@@ -7,13 +8,21 @@ function Chat() {
   const [message, setMessage] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const [showChatHistory, setShowChatHistory] = useState(false);
+  const location = useLocation();
   var username = localStorage.getItem("username");
-
   const navigate = useNavigate();
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    setUser2(searchParams.get('user2'));
+    if(location.state) {
+      const { from } = location.state;
+      var tutorUsername = from;
+      console.log("From CourseDetails!");
+      setUser2(tutorUsername);
+    }
+    else{
+      const searchParams = new URLSearchParams(window.location.search);
+      setUser2(searchParams.get('user2'));
+    }
   }, []);
 
 

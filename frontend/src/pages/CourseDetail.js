@@ -192,7 +192,10 @@ const CourseDetail = () => {
                                 )
                             })}
                         </div>
-                        <Link className="nav-link chat-button" to="/chat" state={{ }}>Chat with Tutor</Link>
+                        { course.tutorUsername.S != null ?
+                            <Link className="nav-link chat-button" to="/chat" state={{ from: course.tutorUsername.S }}>Chat with Tutor</Link>
+                            : ""
+                        }
                         { username != null ? 
                           !enrolled ?
                             <button className="nav-link chat-button" onClick={handleEnrollments}>Enroll Now</button>
