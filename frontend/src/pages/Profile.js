@@ -48,10 +48,8 @@ function hashPassword(password) {
 }
 
 const Profile = () => {
-  //const [username, setUsername] = useState('');
-  // const [email, setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [showAddCourse, setShowAddCourse] = useState(false)
-  // const [isTutor, setIsTutor] = useState(false)
   const [currentPasswordFromUser, setCurrentPasswordFromUser] = useState('')
   const [newpassword, setNewPassword] = useState('')
   const [currentPasswordDBHashed, setCurrentPasswordDBHashed] = useState('')
@@ -81,6 +79,7 @@ const Profile = () => {
       console.log(role);
 
       setCurrentPasswordDBHashed(user_info.data['info_on_user']['password']['S']);
+      setEmail(user_info.data['info_on_user']['email']['S']);
     }
     fetchData();
   }, []);
@@ -119,13 +118,19 @@ const Profile = () => {
 
   return (
     <div className="wrapper">
-      {isValidUserSession && (
+      {isValidUserSession && email && (
       <div className="container">
       <title>Profile</title>
         <form onSubmit={onSubmit}>
           <h2 className="heading">Profile</h2>
-          <div className="form-group">
-            <label htmlFor="role">You are:</label>
+          <div className="form-group label-centered profile_info">
+            <label htmlFor="role">Your username: {username}</label>
+          </div>
+          <div className="form-group label-centered profile_info">
+            <label htmlFor="role">Your role: {role}</label>
+          </div>
+          <div className="form-group label-centered profile_info">
+            <label htmlFor="role">Your email: {email}</label>
           </div>
 
           <div className="form-group">
