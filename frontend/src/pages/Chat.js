@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { json, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './css/chat.css';
 
 function Chat() {
@@ -20,8 +19,9 @@ function Chat() {
       setUser2(tutorUsername);
     }
     else{
-      const searchParams = new URLSearchParams(window.location.search);
-      setUser2(searchParams.get('user2'));
+      // const searchParams = new URLSearchParams(window.location.search);
+      const user2 = localStorage.getItem("user2");
+      setUser2(user2);
     }
   }, []);
 
@@ -62,9 +62,6 @@ function Chat() {
     }
   };
 
-  const handleUser2Change = (event) => {
-    setUser2(event.target.value);
-  };
 
   const handleMessageChange = (event) => {
     setMessage(event.target.value);
@@ -120,10 +117,6 @@ function Chat() {
         )}
 
         <form className="chat-form" onSubmit={handleSubmit}>
-          {/* <label>
-            User 2:
-            <input type="text" value={user2} onChange={handleUser2Change} />
-          </label> */}
           <label>
             Message:
             <input type="text" value={message} onChange={handleMessageChange} />

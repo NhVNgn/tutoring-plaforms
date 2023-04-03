@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './css/chat.css';
 
 function ChatUsersHistory() {
   const [userList, setUserList] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchData() {
@@ -18,7 +20,9 @@ function ChatUsersHistory() {
 
   function handleUserClick(user2) {
     // Code to display chat history between the current user and the clicked user
-    window.location.href = `/chat?user2=${user2}`;
+    localStorage.setItem("user2", user2);
+    // window.location.href = `/chat`;
+    navigate('/chat');
   }
 
   return (
