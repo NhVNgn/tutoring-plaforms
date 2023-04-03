@@ -57,6 +57,8 @@ const Profile = () => {
   const username = localStorage.getItem("username")
   const sessionID = localStorage.getItem("sessionID")
   const role = localStorage.getItem("role")
+  const firstname = localStorage.getItem("firstname")
+  const lastname = localStorage.getItem("lastname")
   const isTutor = (role === "tutor")
 
   useEffect(() => {
@@ -138,6 +140,12 @@ const Profile = () => {
           </div>
           <div className="form-group profile_info">
             <label htmlFor="role">Your email: {email}</label>
+          </div>
+          <div className="form-group profile_info">
+            <label htmlFor="role">First Name: {firstname}</label>
+          </div>
+          <div className="form-group profile_info">
+            <label htmlFor="role">Last Name: {lastname}</label>
           </div>
 
           <div className="form-group">
