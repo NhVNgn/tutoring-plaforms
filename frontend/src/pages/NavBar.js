@@ -63,44 +63,44 @@ const NavBar = ({ loggedUsername, setLoggedUsername }) => {
     <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul className="navbar-nav">
         <li className="nav-item">
-          <NavLink exact activeClassName="active" className="nav-link" to="/">
+          <NavLink activeclassname="active" className="nav-link" to="/">
             Home
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink activeClassName="active" className="nav-link" to={isLoggedIn ? "/mylibrary" : "/login"}>
+          <NavLink activeclassname="active" className="nav-link" to={isLoggedIn ? "/mylibrary" : "/login"}>
             My Library
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink activeClassName="active" className="nav-link" to="/about">
+          <NavLink activeclassname="active" className="nav-link" to="/about">
             About
           </NavLink>
         </li>
         {isLoggedIn && (
           <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to="/profile">
+            <NavLink activeclassname="active" className="nav-link" to="/profile">
               {loggedUsername}'s Profile
             </NavLink>
           </li>
         )}
         {isLoggedIn && (
           <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to="/chathistory">
+            <NavLink activeclassname="active" className="nav-link" to="/chathistory">
               Chat
             </NavLink>
           </li>
         )}
         {isLoggedIn && (
           <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to="/" onClick={handleLogout}>
+            <NavLink activeclassname="active" className="nav-link" to="/" onClick={handleLogout}>
               Logout
             </NavLink>
           </li>
         )}
         {!isLoggedIn && (
           <li className="nav-item">
-            <NavLink activeClassName="active" className="nav-link" to="/login">
+            <NavLink activeclassname="active" className="nav-link" to="/login">
               Login
             </NavLink>
           </li>

@@ -7,7 +7,8 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('');
-
+  const [fname, setfname] = useState('');
+  const [lname, setlname] = useState('');
   const headers = {
     "Content-Type": "application/json",
 
@@ -30,14 +31,24 @@ const Register = () => {
     setPassword(event.target.value);
   };
 
+  const handlefnameChange = (event) => {
+    setfname(event.target.value);
+  };
+  const handlelnameChange = (event) => {
+    setlname(event.target.value);
+  };
+
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(userRole + " " + username + " " + email + " " + password);
+    console.log(userRole + " " + username + " " + email + " " + password + " " + fname + " " + lname);
 
     const register = async () => {
       console.log("register called")
       const data = {
         username: username,
+        firstname: fname,
+        lastname: lname,
         password: password,
         email: email,
         role: userRole
@@ -86,6 +97,14 @@ const Register = () => {
             {usernameError && (
               <div className="alert alert-danger">{usernameError}</div>
             )}
+          </div>
+          <div className="form-group">
+            <label htmlFor="name">First name: </label>
+            <input type="name" className="form-control" id="fname" placeholder="Enter your first name" value={fname} onChange={handlefnameChange} required />
+          </div>
+          <div className="form-group">
+            <label htmlFor="name">Last name: </label>
+            <input type="name" className="form-control" id="lname" placeholder="Enter your last name" value={lname} onChange={handlelnameChange} required />
           </div>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
