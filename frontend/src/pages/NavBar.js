@@ -68,7 +68,7 @@ const NavBar = ({ loggedUsername, setLoggedUsername }) => {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink activeclassname="active" className="nav-link" to={isLoggedIn ? "/mylibrary" : "/login"}>
+          <NavLink activeclassname="active" className="nav-link" to="/mylibrary">
             My Library
           </NavLink>
         </li>

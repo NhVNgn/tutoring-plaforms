@@ -112,7 +112,7 @@ const MyLibrary = () => {
                                         <h4>{bookmark.courseName}</h4>
                                         <p className="course-desc">{bookmark.description}</p>
                                         <div className="link-price">
-                                        <p className="price">{bookmark.price}</p>
+                                        <p className="price">${bookmark.price}</p>
                                         {console.log(bookmark)}
                                         {console.log(bookmark.courseID)}
                                         <Link className="nav-link" to="/coursedetail" state={{ from: bookmark.courseID }}>View Course</Link>
@@ -144,7 +144,7 @@ const MyLibrary = () => {
                                     <h4>{course.courseName.S}</h4>
                                     <p className="course-desc">{course.description.S}</p>
                                     <div className="link-price">
-                                        <p className="price">{course.price.S}</p>
+                                        <p className="price">${course.price.S}</p>
                                         <Link className="nav-link" to="/coursedetail" state={{ from: course.courseID.S }}>View Course</Link>
                                     </div>
                                     </div>

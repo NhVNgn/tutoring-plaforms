@@ -31,7 +31,7 @@ export default function App() {
           <Route path="chathistory" element={loggedUsername ? <ChatUsersHistory /> : <Navigate to="/login" />} />
           <Route path="coursedetail" element={<CourseDetail />} />
           <Route path="enrolledcourses" element={loggedUsername ? <EnrolledCourses /> : <Navigate to="/login" />} />
-          <Route path="mylibrary" element={<MyLibrary />} />
+          <Route path="mylibrary" element={loggedUsername ? <MyLibrary /> : <Navigate to="/login" />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -56,7 +56,7 @@ const EnrolledCourses = () => {
                   <h4>{course.courseName.S}</h4>
                   <p className="course-desc">{course.description.S}</p>
                   <div className="link-price">
-                    <p className="price">{course.price.S}</p>
+                    <p className="price">${course.price.S}</p>
                     <Link className="nav-link" to="/coursedetail" state={{ from: course.courseID.S }}>View Course</Link>
                   </div>
                 </div>
